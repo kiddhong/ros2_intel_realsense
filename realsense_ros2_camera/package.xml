@@ -15,7 +15,7 @@
   <depend>builtin_interfaces</depend>
   <depend>cv_bridge</depend>
   <depend>image_transport</depend>
-  <depend>librealsense2</depend>
+  <depend>realsense2</depend>
   <depend>rclcpp</depend>
   <depend>realsense_camera_msgs</depend>
   <depend>sensor_msgs</depend>
