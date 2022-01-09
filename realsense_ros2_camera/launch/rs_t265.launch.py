@@ -18,11 +18,12 @@ from launch import LaunchDescription
 import launch_ros.actions
 import launch.actions
 
+
 def generate_launch_description():
     enable_imu = launch.substitutions.LaunchConfiguration('enable_imu',
                                                                   default='true')
-    gyro_fps = launch.substitutions.LaunchConfiguration('gyro_fps', default='400')
-    accel_fps = launch.substitutions.LaunchConfiguration('accel_fps', default='250')
+    gyro_fps = launch.substitutions.LaunchConfiguration('gyro_fps', default='200')
+    accel_fps = launch.substitutions.LaunchConfiguration('accel_fps', default='62')
     return LaunchDescription([
         # Realsense
         launch_ros.actions.Node(
