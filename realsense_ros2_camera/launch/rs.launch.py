@@ -12,21 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Launch realsense_ros2_camera node without rviz2."""
+import os
 
 from launch import LaunchDescription
 import launch_ros.actions
 import launch.actions
 
+
 def generate_launch_description():
+    tote_namespace = launch.substitutions.LaunchConfiguration('tote_namespace')
+    param_dir = launch.substitutions.LaunchConfiguration('param_dir')
+
     enable_imu = launch.substitutions.LaunchConfiguration('enable_imu',
                                                                   default='true')
     gyro_fps = launch.substitutions.LaunchConfiguration('gyro_fps', default='400')
     accel_fps = launch.substitutions.LaunchConfiguration('accel_fps', default='250')
+
     return LaunchDescription([
+        launch.actions.DeclareLaunchArgument(
+            'tote_namespace',
+            default_value=os.environ['TOTE_NAMESPACE'],
+            description='Specifying namespace to node'),
+
         # Realsense
         launch_ros.actions.Node(
-            package='realsense_ros2_camera', node_executable='realsense_ros2_camera',
-            parameters=[{'enable_imu': enable_imu}, {'gyro_fps': gyro_fps}, {'accel_fps': accel_fps}],
+            node_namespace=tote_namespace,
+            package='realsense_ros2_camera',
+            node_executable='realsense_ros2_camera',
+            parameters=[{'enable_imu': enable_imu},
+                        {'gyro_fps': gyro_fps},
+                        {'accel_fps': accel_fps}],
             output='screen'),
     ])
