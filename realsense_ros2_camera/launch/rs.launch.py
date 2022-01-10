@@ -21,7 +21,6 @@ import launch.actions
 
 def generate_launch_description():
     tote_namespace = launch.substitutions.LaunchConfiguration('tote_namespace')
-    param_dir = launch.substitutions.LaunchConfiguration('param_dir')
 
     enable_imu = launch.substitutions.LaunchConfiguration('enable_imu',
                                                                   default='true')
@@ -39,6 +38,7 @@ def generate_launch_description():
             node_namespace=tote_namespace,
             package='realsense_ros2_camera',
             node_executable='realsense_ros2_camera',
+            node_name='realsense_ros2_camera',
             parameters=[{'enable_imu': enable_imu},
                         {'gyro_fps': gyro_fps},
                         {'accel_fps': accel_fps}],
